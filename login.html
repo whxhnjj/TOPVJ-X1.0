@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=1080,minimum-scale=0.1,maximum-scale=1,user-scalable=yes" />
+	<style>
+		*{margin: 0;padding: 0;font-family: Arial,微软雅黑;}
+		html{font-size:16px;}
+		body{width:1080px;margin:180px auto 60px;padding: 0;}
+		.wrap{width: 1000px;height:100%;overflow:hidden;margin:0 40px;}
+		#submit{margin-top: 50px;border: 0!important;outline: 0;-webkit-appearance:none;border-radius:15px;background:#01B9EF;color: #FFF;font-size:2.8rem;height: 160px;width:100%; }
+		input{height:158px;font-size:2.8rem;outline:0;color: #666;border: 1px solid #666;background-repeat:no-repeat;background-position:30px center;}
+
+		header{width:1000px;height:140px;background:#01B9EF;position: fixed;padding:0 40px;left:50%;top: 0;margin-left:-540px;overflow: hidden;z-index: 100;}
+		.part{text-align: right;line-height: 140px;font-size:2.7rem;color: #FFF;background: url("./image/login_logo.png") no-repeat 40px center;background-size:400px;}
+
+		#username{width:888px;background-image: url("./image/zhanghao.png");padding-left: 110px;margin-bottom:50px;margin-top:300px;}
+		#password{width:888px;float: left;background-image: url("./image/mima.png");padding-left: 110px;}
+	</style>
+	<title data-localize="Company_Name">Xi`an KALON Electrolnic sci & Tec Co.LTD</title>
+	<script type="text/javascript" src="./js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="lib/jquery.i18n.properties.js"></script>
+
+	<script type="text/javascript" src="./js/jquery.cookie.js"></script>
+	<!--<script type="text/javascript" src="./js/jquery.localize.js"></script>-->
+	<script type="text/javascript" src="./js/md5.min.js"></script>
+	<script type="text/javascript" src="./js/kl.public.js"></script>
+	<script type="text/javascript" src="./js/kl.system-1.js"></script>
+</head>
+<body>
+<header>
+	<div class="part">TOPVJ &nbsp;X</div>
+</header>
+
+<div class="wrap login" >
+	<form>
+		<input type="text"  id="username" required="" value=""  placeholder="请输入账号" />
+		<input type="password" id="password"  value="" required="" placeholder="请输入密码" />
+		<input type="button" id="submit" value="登录" name="login" onclick="login_onclick()" />
+		<p id="loginmsg"></p>
+	</form>
+</div>
+
+
+</body>
+</html>
+

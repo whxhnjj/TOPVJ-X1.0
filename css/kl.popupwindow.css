@@ -1,0 +1,198 @@
+*{
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color:rgba(255,255,255,0);-webkit-overflow-scrolling:touch;overflow-scrolling:touch;
+}
+ul {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+}
+#guoxj_popupdlg{display: block;}
+
+.find_nav_left {
+    height: 46px;
+    position: relative;
+    overflow: hidden;
+    -moz-box-flex: 1;
+    -webkit-box-flex: 1;
+    box-flex: 1;
+}
+.find_nav_list {
+    position: absolute;
+    width: 100%;
+    left: 0;
+}
+.find_nav_list ul {
+    position: relative;
+    white-space: nowrap;
+    font-size: 0;
+    background:#48a5f4 !important;
+    padding:0 16px;
+}
+.find_nav_list ul li {
+    display: inline-block;
+    padding-right:20px;
+    background: url("../image/next.png") no-repeat right center;
+    background-size:16px;
+    margin-left: 5px;
+}
+.find_nav_list ul li a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    line-height: 46px;
+    font-size:14px;
+    color: #fff;
+    padding: 0;
+}
+.find_nav_cur a {
+    color:#FFF !important;
+}
+
+.file_list_box{
+    width: 100%;
+    height: 60%;
+    background-color: white;
+    display: -moz-box;
+    display: -webkit-box;
+	resize:none;
+	overflow:auto;
+}
+
+.explore_file_list { margin:0px 0px 0px 0px; list-style: none;background-color: white; color:black;font-size: 1em;width: 100%;padding: 25px;}
+.explore_file_list li{list-style: none;border-bottom:1px solid #d9d9d9;text-align: left;cursor: pointer;-webkit-user-select: none;border-bottom: 1px solid #AAA;background: url("../image/next1.png") no-repeat right center;
+background-size: 16px;padding:10px 20px 10px 0;font-size: 14px;}
+.explore_file_list li span{padding:0px 5px;}
+.explore_file_list li:active{color: #f00;}
+.explore_file_list li.active{color:red;position: relative;top:-1px;height: 30px;}
+/*OSD存储设备按钮样式修改*/
+.ccsv_ipt{width: 100%;height: 40px!important;margin:0 auto!important;display: block;}
+/*OSD文件样式修改*/
+/*输入——修改弹框样式*/
+#active_zone{border-radius: 10px!important;}
+#guoxj_text_edit_div{margin: 20px 0 10px 0;}
+.font_title{width: 20%!important;float: left;line-height:20px;font-size: 12px;margin-right: 2%;}
+.title2{margin:0 2% 0 10%!important;}
+#guoxj_font_color{width:20%!important;float: left;line-height:20px;border:1px solid #aaaaaa;margin-right: 2%;outline: none;}
+#guoxj_font_size{width:20%;float: left;line-height:20px;}
+    /*修改按钮的样式 */
+    #guoxj_txt_setting_submit{width: 80%;height:50%;outline: none;background:#01b9ef;color: #FFF;border:none;border-radius: 6px;}
+    #guoxj_txt_setting_cannel{width:80%;height:50%;outline: none;background:#59D6FA;color: #FFF;border: none;border-radius: 6px;}
+
+/*拖动弹框样式修改*/
+.slidezone_list{
+    width: 330px;
+    height: 154px;
+    margin: 25px;
+    overflow: hidden;
+}
+.slidezone_list div{width: 120px;height:40px;outline: none;border: none;float: left;margin-bottom:15px;margin-right:30px;}
+.slidezone_list div .input_div{width: 120px;height:40px;float: left;background:#FA5969;color: #FFF;display: block;border-radius: 8px;text-align: center;line-height: 40px;}
+.guoxj_txt_setting_submit1{
+    width: 120px!important;
+    height: 40px!important;
+    text-align: center;
+    line-height: 40px;
+}
+.guoxj_txt_setting_cannel1{
+    width: 120px!important;
+    height: 40px!important;
+    text-align: center;
+    line-height: 40px;
+}
+
+/*PTZ样式修改*/
+.ptz_row{margin:10px 0;height: 40px;}
+.ptz_anniu{width:50%;height: 100%;margin: 0 auto;background:#01b9ef;border: none;outline: none;border-radius: 6px;color: #FFF;}
+
+#zoom_near{height:40px!important;margin: 0!important;width: 100%!important;line-height:35px!important;}
+#zoom_far{height:40px!important;margin: 0!important;width: 100%!important;line-height:35px!important; }
+    /*修改PIZ箭头点击样式的点击时的改变*/
+.ptzbtn{display:block;float: left;}
+
+    #ptz_upleft{width:80px!important;height:80px!important;background: url("../image/1.png") no-repeat center center!important;background-size:80px!important;}
+    #ptz_up{width:80px!important;height:80px!important;background: url("../image/2.png") no-repeat center center!important;background-size: 100%;}
+    #ptz_upright{width:80px!important;height:80px!important;background: url("../image/3.png") no-repeat center center!important;background-size: 100%;}
+    #ptz_left{width:80px!important;height:80px!important;background: url("../image/4.png") no-repeat center center!important;background-size: 100%;}
+    #ptz_home{width:80px!important;height:80px!important;background: url("../image/5.png") no-repeat center center!important;background-size: 100%;}
+    #ptz_right{width:80px!important;height:80px!important;background: url("../image/6.png") no-repeat center center!important;background-size: 100%;}
+    #ptz_downleft{width:80px!important;height:80px!important;background: url("../image/7.png") no-repeat center center!important;background-size: 100%;}
+    #ptz_down{width:80px!important;height:80px!important;background: url("../image/8.png") no-repeat center center!important;background-size: 100%;}
+    #ptz_downright{width:80px!important;height:80px!important;background: url("../image/9.png") no-repeat center center!important;background-size: 100%;}
+
+.ptzbtn:active{border: 1px solid #f00!important;}
+/*颜色选取框*/
+.yanse{
+    width:34%!important;
+    height: 20px!important;
+    position: relative;;
+    left: 20%;
+}
+/*回放页面CSS*/
+.state_play select{
+    width: 100%;
+    height: 50px!important;
+}
+.box_state{
+    background: #F3F1F0;
+    padding-bottom: 50px;
+}
+
+.opt .state_opticy{
+    width:150px;
+    height:48px!important;
+    padding-right: 40px;
+    background:#FFF url("../image/folder.png") no-repeat right center;
+    background-size:36px;
+    overflow: hidden;
+}
+.filbalkplay{
+    padding-left: 40px!important;
+    height:48px!important;
+    line-height: 50px!important;
+    -webkit-appearance: listbox;
+    display: inline-block;
+    border:1px solid #AAA;
+}
+.positionBox{
+    height: 50px!important;
+}
+.state_top{margin-top: 40px;}
+.state_play{
+   margin-left: 5%;
+    width: 40%;
+    float: left;
+}
+.state_stop{
+    margin-left:10%;
+    width: 40%;
+    float: left;
+    text-align: center;
+    font-size:20px;
+    height: 50px!important;
+    padding: 0!important;
+    line-height: 50px!important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

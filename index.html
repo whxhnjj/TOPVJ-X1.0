@@ -1,0 +1,960 @@
+<!doctype html>
+<html>
+<head>
+	<title data-locale="Company_Name">Xi`an KALON Electrolnic sci & Tec Co.LTD</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="format-detection" content="telephone=no" />
+	<link rel="stylesheet" href="css/swiper.css">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/kl.popupwindow.css">
+	<script src="js/jquery-1.8.3.min.js"></script>
+	<script src="lib/jquery.js"></script>
+	<script type="text/javascript" src="./js/jquery-1.9.1.min.js"></script>
+	<script src="js/jquery.ui.widget.js"></script>
+	<script src="js/jquery.iframe-transport.js"></script>
+	<script src="js/jquery.fileupload.js"></script>
+	<script type="text/javascript" src="./js/jquery.cookie.js"></script>
+	<!--<script type="text/javascript" src="./js/jquery.localize.js"></script>-->
+	<script type="text/javascript" src="./js/loading_blockUI.js"></script>
+	<script type="text/javascript" src="./js/jquery.blockUI.js"></script>
+	<script type="text/javascript" src="./js/md5.min.js"></script>
+	<script type="text/javascript" src="lib/jquery.i18n.properties.js"></script>
+	<script type="text/javascript" src="lib/language.js"></script>
+	<script type="text/javascript" src="./js/kl.system-1.js"></script>
+	<script type="text/javascript" src="./js/kl.popupwindow.js"></script>
+	<script type="text/javascript" src="./js/kl.public.js"></script>
+	<script type="text/javascript">
+        $(document).ready(function () {
+           // update_login_session();
+            $("#focus_near").hide();
+            $("#focus_far").hide();
+
+            /*手指触摸上*/
+            $(".ptzbtn").on('touchstart', function (e) {
+                e.preventDefault();
+
+                var speed = document.getElementById("pan_speed").value;
+                $(this).css("border", "1px solid #01B9EF");
+                setPan($(this).attr("id").substr(4), speed);
+                $(this).attr("sta", "touchstart");
+            });
+
+            $(".ptzbtn").on('touchmove', function (e) {
+                e.preventDefault();
+
+                if ("touchmove" == $(this).attr("sta")) {
+                    setPan("stop", 0);
+                    $(this).attr("sta", "");
+                }
+            });
+            /*手指触摸上离开*/
+            $(".ptzbtn").on('touchend', function (e) {
+                e.preventDefault();
+                $(this).css("border", "none");
+                setPan("stop", 0);
+                $(this).attr("sta", "");
+                console.log(3);
+            });
+
+
+			/*推近*/
+            $("#zoom_near").on('touchstart',function (e) {
+                e.preventDefault();
+                var speed = document.getElementById("zoom_speed").value;
+                setZoom("near", speed);
+                $(this).css("background", "#0087af");
+                $(this).attr("sta", "touchstart");
+            });
+            $("#zoom_near").on('touchmove', function (e) {
+                e.preventDefault();
+
+                if ("touchmove" == $(this).attr("sta")) {
+                    setZoom("stop", 0);
+                    $(this).attr("sta", "");
+                }
+            });
+            $("#zoom_near").on('touchend',function (e) {
+                e.preventDefault();
+                setZoom("stop", 0);
+                $(this).css("background", "#01b9ef");
+                $(this).attr("sta", "");
+            });
+
+            /*拉远*/
+            $("#zoom_far").on('touchstart',function (e) {
+                e.preventDefault();
+                var speed = document.getElementById("zoom_speed").value;
+                setZoom("far", speed);
+                $(this).css("background", "#0087af");
+                $(this).attr("sta", "touchstart");
+            });
+            $("#zoom_far").on('touchmove', function (e) {
+                e.preventDefault();
+                if ("touchmove" == $(this).attr("sta")) {
+                    setZoom("stop", 0);
+                    $(this).attr("sta", "");
+                }
+            });
+            $("#zoom_far").on('touchend',function (e) {
+                e.preventDefault();
+                setZoom("stop", 0);
+                $(this).css("background", "#01b9ef");
+                $(this).attr("sta", "");
+            });
+        });
+	</script>
+</head>
+<body>
+<div class="box_tab">
+	<div id="arr">
+		<div id="back" onclick="back()"></div>
+		<div class="set pax" data-locale="Configration">配置</div>
+	</div>
+	<div class="container" id="setShow">
+		<div class="menu">
+			<ul class="ulmenu1">
+				<li class="selected"><img src="image/wifi.png" class="img-responsive" width="18" height="18"><a href="javascript:void(0)">WI-FI</a></li>
+				<li><img src="image/network.png" class="img-responsive" width="18" height="18"><a href="javascript:void(0)" data-locale="Network">网络</a></li>
+				<li><img src="image/language.png" class="img-responsive" width="18" height="18"><a href="javascript:void(0)" data-locale="Language">语言</a></li>
+				<li><img src="image/password.png" class="img-responsive" width="18" height="18"><a href="javascript:void(0)" data-locale="Password">密码</a></li>
+				<li><img src="image/system.png" class="img-responsive" width="18" height="18"><a href="javascript:void(0)" data-locale="System">系统</a></li>
+				<li><img src="image/about.png" class="img-responsive" width="18" height="18"><a href="javascript:void(0)" data-locale="About">关于</a></li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="content">
+			<div class="menu1 menu_tab" name="setting_page">
+				<!--wifi-->
+				<div id="tab1" class="tab active">
+					<p><label data-locale="WI-FI Name:">Wi-Fi名:</label> <input type="text" name="wifi_ssid" /></p>
+					<p>
+						<label data-locale="encrypt">加密模式：</label>
+						<select class="wifi_mode" name="wifi_encryption_mode">
+							<option value="0">WPAPSK</option>
+							<option value="1">WPA2PSK</option>
+						</select></p>
+					<p>
+						<label data-locale="uPassword">密码：</label>
+						<input type="password" name="wifi_password"/></p>
+					<br>
+					<input class="valfont yingyong tab_list01" type="button" data-locale="Apply"
+						   onclick="wifi_setting_apply()" value="启用"/>
+				</div>
+				<!--网络-->
+				<div id="tab2" class="tab">
+					<p>
+						<label data-locale="Access Mode">获取方式：</label>
+						<select name="network_access" onchange="net_work_access(this)" id="shezhi1" >
+							<option value="0" selected="selected" data-locale="Static">静态</option>
+							<option value="1" data-locale="Dynamic">动态</option>
+						</select>
+					</p>
+					<p>
+						<label data-locale="IP Address">IP 地址：</label>
+						<input type="text" name="network_ip_address" class="tab_1" /></p>
+					<p>
+						<label data-locale="Subnet Mask">子网掩码：</label>
+						<input type="text" name="network_mask" class="tab_1" /></p>
+					<p>
+						<label data-locale="Default Gateway">默认网关：</label>
+						<input type="text" name="network_default" class="tab_1" /></p>
+					<p>
+						<label data-locale="Primary DNS">主DNS：</label>
+						<input class="tab_1" name="network_dns" type="text" placeholder="19.29.29.29" readonly /></p>
+					<p>
+						<label data-locale="Secondary DNS">副DNS：</label>
+						<input class="tab_1" type="text"  name="network_to_dns" placeholder="182.254.116.11" readonly/></p>
+
+					<input class="valfont yingyong tab_list01" type="button" data-locale="Apply" value="启用" onclick="network_setting_apply()" />
+				</div>
+				<!--语言-->
+				<div id="tab3" class="tab">
+					<label class="tab3_language" data-locale="Language">语言：</label>
+					<select id="shezhi2">
+						<option value="zh">简体中文</option>
+						<option value="en">English</option>
+					</select>
+				</div>
+				<!--密码-->
+				<div id="tab4" class="tab">
+					<p>
+						<label data-locale="Old Password">原密码：</label>
+						<input class="seat_font01" type="password"  name="used_password" value="" maxlength="6" /></p>
+					<p>
+						<label data-locale="New Password">新密码：</label>
+						<input class="seat_font02" type="password" name="new_password"  maxlength="6" /></p>
+					<p>
+						<label data-locale="Confirm Password">确认密码：</label>
+						<input class="seat_font03" type="password" name="confirm_password" maxlength="6" /></p>
+					<input class="valfont yingyong tab_list01" type="button" data-locale="Apply" value="启用" onclick="password_setting_apply()" />
+				</div>
+				<!--系统-->
+				<div id="tab5" class="tab">
+					<p>
+						<label data-locale="Current Version">当前版本：</label>
+						<input id="hang1" type="text" name="version" value="topvjx-1.0" readonly/>
+					</p>
+					<div class="tab_list">
+						<div class="tab_list_title" data-locale="Upgrade Pack:">升级包:</div>
+						<div class="tab_box">
+							<input type="text" id="blueButton" class="blueButton" size="20" readonly/>
+							<input type="file" id="uploadfile" name="files[]" class="myFileUpload"  accept=".gz"  onchange="file_upload_change(this)" />
+						</div>
+					</div>
+					<input class="valfont yingyong tab_list01" type="button" data-locale="Apply" value="升级" onclick="device_upgrade()" />
+
+					<input type="button" class="valfont yingyong tab_list02" data-locale="Reboot System" value="重启系统" onclick="restart_device_1()" />
+					<input type="button" class="hfmr valfont tab_list03" data-locale="Set Default" value="恢复出厂设置" onclick="reset_device_0()" />
+				</div>
+				<!--关于-->
+				<div id="tab6" class="tab">
+					<h4 data-locale="Company_Name">西安凯联电子科技有限公司</h4>
+					<p class="p1" data-locale="address">中国陕西省西安市碑林区东关正街28号办公楼四层办公室</p>
+					<p class="p2">http://www.topvj.cn</p>
+					<p class="p3">400-029-1201</p>
+					<p class="p4">kailiandianzi@163.com</p>
+
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>
+<!--系统弹框-->
+<div class="show_model_0">
+	<div class="div_show_model">
+		<div class="div_show_title" data-locale="Do you want to restore the factory settings?" >确认要恢复出厂设置吗？</div>
+		<div class="div_show_submit" data-locale="confirm" onclick="reset_device()">确认</div>
+		<div class="div_show_cancel" data-locale="cancel" onclick="div_show_cancel()">取消</div>
+	</div>
+</div>
+<div class="show_model_1">
+	<div class="div_show_model">
+		<div class="div_show_title" data-locale="Do you want to reboot the system?" >确认要重启系统吗？</div>
+		<div class="div_show_submit" data-locale="confirm" onclick="restart_device()">确认</div>
+		<div class="div_show_cancel" data-locale="cancel" onclick="div_show_cancel()">取消</div>
+	</div>
+</div>
+
+<!--**************************************************index*********************************************************-->
+	<div id="top">
+		<div class="logo-box">
+			<img src="image/shezhi.png"  onclick="fullPageShow()" />
+		</div>
+		<div class="swiper-container" id="nav" style="width: 100%;">
+			<div class="row swiper-wrapper">
+				<div class="swiper-slide"><span data-locale="Encode">编码</span></div>
+				<div class="swiper-slide"><span data-locale="Pull">拉流</span></div>
+				<div class="swiper-slide"><span data-locale="Record">录制</span></div>
+				<div class="swiper-slide"><span data-locale="OSD">字幕</span></div>
+				<div class="swiper-slide"><span data-locale="PTZ">云台</span></div>
+				<div class="swiper-slide"><span data-locale="Audio">音频</span></div>
+				<div class="swiper-slide"><span data-locale="Play">播放</span></div>
+				<div class="swiper-slide"><span data-locale="Cast">轮播</span></div>
+<!--				<div class="swiper-slide"><span data-locale="Push">推流</span></div>-->
+				<div class="swiper-slide"><span data-locale="State">状态</span></div>
+				<div class="bar">
+					<div class="color"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+<div class="swiper-container" id="page">
+	<div class="swiper-wrapper ">
+		<!--   //**********************************************0编码*********************************// -->
+		<div class="swiper-slide slidepage ptz_mg" name="encoder_page">
+			<div class="container">
+				<div class="row center-block ">
+					<div class="col-xs-6" data-locale="Pass:">通道:</div>
+					<div class="col-xs-6">
+						<select name="device" class="box_height" onchange=encoder_page_device_change(this.value)>
+							<option value="1048577" selected="selected">PGM</option>
+							<option value="3">CH1</option>
+							<option value="2">CH2</option>
+							<option value="1">CH3</option>
+							<option value="0">CH4</option>
+						</select>
+					</div>
+				</div>
+				<div class="row center-block">
+					<div class="col-xs-6" data-locale="Encoder Source">编码源:</div>
+					<div class="col-xs-6">
+						<select class="box_height" name='encoder_type'
+								onchange=encoder_page_encoder_change(this.value)>
+							<option value="0" selected="selected" data-locale="Main Encoder（Record）">主码流（录制码流）</option>
+							<option value="1" data-locale="Sub Encoder（Push）">子码流（推流码流）</option>
+						</select>
+					</div>
+				</div>
+				<div class="row center-block ">
+					<div class="col-xs-6" data-locale="Resulotion">分辨率:</div>
+					<div class="col-xs-6">
+						<select autofocus name='resolution' class="box_height">
+							<option value='2073600' selected="selected">1920*1080</option>
+							<option value='921600'>1280*720</option>
+							<option value='414720'>720*576</option>
+							<option value='345600'>720*480</option>
+							<option value='307200'>640*480</option>
+							<option value='76800'>320*240</option>
+							<option value='19200'>160*120</option>
+						</select></div>
+				</div>
+				<div class="row center-block ">
+					<div class="col-xs-6" data-locale="Frame Rate:">帧率:</div>
+					<div class="col-xs-6">
+						<select name='framerate' class="box_height">
+							<option value='60' selected="selected">60</option>
+							<option value='50'>50</option>
+							<option value='30'>30</option>
+							<option value='25'>25</option>
+							<option value='20'>20</option>
+							<option value='15'>15</option>
+							<option value='10'>10</option>
+							<option value='5'>5</option>
+							<option value='1'>1</option>
+						</select>
+					</div>
+				</div>
+				<div class="row center-block ">
+					<div class="col-xs-6" data-locale="Coding Level">编码方式:</div>
+					<div class="col-xs-6">
+						<select autofocus name='profile' class="box_height">
+							<option value='2' selected="selected">Heigh</option>
+							<option value='1'>Main</option>
+							<option value='0'>Baseline</option>
+						</select>
+					</div>
+				</div>
+				<div class="row center-block ">
+					<div class="col-xs-6" data-locale="VideoBitrate">视频码率:</div>
+					<div class="col-xs-6">
+						<select name='videobitrate' class="box_height">
+							<option value='65536' selected="selected">64M</option>
+							<option value='32768'>32M</option>
+							<option value='24576'>24M</option>
+							<option value='16384'>16M</option>
+							<option value='12288'>12M</option>
+							<option value='8192'>8M</option>
+							<option value='6144'>6M</option>
+							<option value='4096'>4M</option>
+							<option value='2048'>2M</option>
+							<option value='1024'>1M</option>
+							<option value='512'>512K</option>
+							<option value='256'>256K</option>
+						</select>
+					</div>
+				</div>
+				<div class="row center-block ">
+					<div class="col-xs-6" data-locale="Mode:">视频比特率:</div>
+					<div class="col-xs-6">
+						<select name='mode' class="box_height">
+							<option value='0' selected="selected" data-locale="VBR">动态比特率</option>
+							<option value='1' data-locale="CBR">固定比特率</option>
+							<option value='2' data-locale="ABR">平均比特率</option>
+						</select>
+					</div>
+				</div>
+				<input class="valfont anniu center-block" id="enable" type="button" data-locale="Start" value="启用"
+					   onclick=encoder_page_save_encoder() />
+			</div>
+		</div>
+			<!--    ******************************************1拉流*******************************************-->
+			<div class="swiper-slide slidepage ptz_mg" name="pullstream_page">
+				<div class="container">
+					<div class="row center-block ">
+						<div class=" col-xs-6" data-locale="Pass:">通道:</div>
+						<div class=" col-xs-6">
+							<select name="device" class="box_height"
+									onchange="pullstream_page_device_change(this.value)">
+								<option value="2097152">NET1</option>
+								<option value="2097153">NET2</option>
+								<option value="2097154">NET3</option>
+								<!--<option value="2097155">NET4</option>-->
+							</select>
+						</div>
+					</div>
+					<div class="row center-block ">
+						<div class=" col-xs-6" data-locale="Pull Type">拉流类型:</div>
+						<div class=" col-xs-6"><input class="box_height" type="text" value="RTSP"/></div>
+					</div>
+					<div class="row center-block">
+						<div class=" col-xs-6" data-locale="Pull Url">拉流地址:</div>
+						<div class=" col-xs-6">
+							<div class="width">
+								<input name="pullstream_url" type="text" class="pull_right box_height bordeio inputClass"
+									   id="doc-input" placeholder="Please input stream URL...."
+									   onclick="build(this,1)"/>
+							</div>
+						</div>
+					</div>
+					<input type="button" value="启用" name="pullstream_operation" data-locale="Start"
+						   class="valfont anniu center-block" onclick=pullstream_operation() />
+				</div>
+			</div>
+			<!--    ****************************************2录制********************************************-->
+			<div class="swiper-slide slidepage ptz_mg" name="record_page">
+				<div class="swiper-slide slidescroll">
+					<div class="container">
+						<!--输出-->
+						<div class="row center-block rec_text" data-locale="Output recording">输出录制</div>
+						<div class="row center-block ">
+							<div class=" col-xs-6" data-locale="Pass:">通道:</div>
+							<div class=" col-xs-6">
+								<select name="device_0" class="box_height"
+										onchange="record_page_device_change_0(this.value)">
+									<option value="1048577" selected="selected">PGM</option>
+								</select>
+							</div>
+						</div>
+					<!--	<div class="row center-block ">
+							<div class=" col-xs-6" data-locale="Record Channel">录制频道:</div>
+							<div class=" col-xs-6">
+								<select name="record_level_0" class="box_height"
+										onchange="record_page_level_change_0(this.value)">
+									<option value="0">Channel 1</option>
+									<option value="1">Channel 2</option>
+								</select>
+							</div>
+						</div>
+						<div class="row center-block ">
+							<div class=" col-xs-6" data-locale="Encoder">码流:</div>
+							<div class=" col-xs-6">
+								<select name="encoder_type_0" class="box_height">
+									<option value="0" data-locale="Main Encoder">主码流</option>
+									<option value="1" data-locale="Sub Encoder">子码流</option>
+								</select>
+							</div>
+						</div>-->
+
+						<div class="row center-block ">
+							<div class=" col-xs-6" data-locale="Record Format">录制格式:</div>
+							<div class=" col-xs-6">
+								<select name="record_fmt_0" class="box_height">
+									<option value="0">MP4</option>
+									<option value="1">TS</option>
+								</select>
+							</div>
+						</div>
+						<div class="row center-block ">
+							<div class=" col-xs-6" data-locale="File Name">文件名:</div>
+							<div class=" col-xs-6">
+								<input type="text" class="box_height" name="file_name_0" />
+							</div>
+						</div>
+						<div class="row center-block ">
+							<div class=" col-xs-6" data-locale="Duration">时长:</div>
+							<div class=" col-xs-6">
+								<select name="record_duration_0" class="box_height">
+									<option value="0" data-locale="Unlimited">无限</option>
+									<option value="1">30</option>
+									<option value="2">60</option>
+								</select>
+							</div>
+						</div>
+						<input type="button" name="start_record_0" value="启用" data-locale="Start" class="valfont anniu center-block" onclick="record_page_operation()" />
+						<!--<button name="start_record" class="anniu center-block"  onclick="record_page_operation()" data-locale="Start">开始</button>-->
+				<!--输入-->
+						<div class="row center-block rec_text"  data-locale="Input recording">输入录制</div>
+						<div class="row center-block ">
+							<div class=" col-xs-6" data-locale="Pass:">通道:</div>
+							<div class=" col-xs-6">
+								<select name="device_1" class="box_height"
+										onchange="record_page_device_change_1(this.value)">
+									<option value="3" selected="selected">CH1</option>
+									<option value="2">CH2</option>
+									<option value="1">CH3</option>
+									<option value="0">CH4</option>
+								</select>
+							</div>
+						</div>
+						<div class="row center-block ">
+							<div class=" col-xs-6" data-locale="Record Format">录制格式:</div>
+							<div class=" col-xs-6">
+								<select name="record_fmt_1" class="box_height">
+									<option value="0">MP4</option>
+									<option value="1">TS</option>
+								</select>
+							</div>
+						</div>
+						<div class="row center-block ">
+							<div class=" col-xs-6" data-locale="File Name">文件名:</div>
+							<div class=" col-xs-6">
+								<input type="text" class="box_height" name="file_name_1" />
+							</div>
+						</div>
+						<div class="row center-block ">
+							<div class=" col-xs-6" data-locale="Duration">时长:</div>
+							<div class=" col-xs-6">
+								<select name="record_duration_1" class="box_height">
+									<option value="0" data-locale="Unlimited">无限</option>
+									<option value="1">30</option>
+									<option value="2">60</option>
+								</select>
+							</div>
+						</div>
+						<input type="button" name="start_record_1" value="启用" data-locale="Start" class="valfont anniu center-block" onclick="record_page_operation_1()" />
+					</div>
+				</div>
+			</div>
+			<!--    ****************************************3OSD*********************************************-->
+			<div class="swiper-slide slidepage ptz_mg" name="osd_page">
+				<div class="swiper-slide slidescroll">
+					<div class="container">
+<!--						<div class="row center-block ">
+							<div class=" col-xs-6" data-locale="Device Name:">设备名:</div>
+							<div class=" col-xs-6">
+								<select name="device" class="box_height" onchange=osd_page_device_change(this.value)>
+									<option value="1048577" selected="selected">PGM</option>
+								</select>
+							</div>
+						</div>-->
+						<div class="row center-block ">
+							<div class=" col-xs-6" data-locale="layer:">图层:</div>
+							<div class=" col-xs-6">
+								<select class="box_height" name="osd_level" onchange=osd_page_level_change(this.value)>
+									<option value="0" data-locale="Layer 1">图层1</option>
+									<option value="1" data-locale="Layer 2">图层2</option>
+									<option value="2" data-locale="Layer 3">图层3</option>
+									<option value="3" data-locale="Layer 4">图层4</option>
+								</select>
+							</div>
+						</div>
+						<div class="row center-block ">
+							<div class=" col-xs-6" data-locale="Type">类型:</div>
+							<div class=" col-xs-6">
+								<select name="osd_type" class="box_height osd_type">
+									<option value="0" data-locale="Static Text">文本</option>
+									<option value="1" data-locale="Picture">图片</option>
+									<!--<option value="2" data-locale="Dynamic Text">弹幕</option>-->
+								</select>
+							</div>
+						</div>
+						<div class="row center-block" class="show">
+							<div class=" col-xs-6" data-locale="Content">内容:</div>
+							<div class=" col-xs-6">
+								<input type="text" readonly="readonly" name="osd_contain" class="content-txt"
+									   style="height:50px;padding-left:3px;text-align: left;"
+									   onclick="osd_page_content_setting(this,$('.osd_type option:selected').val());"/>
+							</div>
+						</div>
+
+						<div class="row center-block">
+							<div class=" col-xs-6" data-locale="Position">位置:</div>
+							<div class=" col-xs-6">
+								<input type="text" readonly="readonly" class="positionBox"
+									   style="text-align: left;padding-left:3px;" name="osd_position"
+									   onclick="build(this,3);"/>
+							</div>
+						</div>
+						<input type="button" name="osd_operation" value="启用" data-locale="Start"
+							   class="valfont anniu center-block" onclick="osd_operation()"/>
+						<!--<button name="osd_operation" class="anniu center-block" onclick="osd_operation()">Start</button>-->
+					</div>
+				</div>
+			</div>
+			<!--  ***********************************4PTZ*************************************************-->
+			<div class="swiper-slide slidepage ptz_mg" name="ptz_page">
+				<div class="container">
+					<div class="row center-block">
+						<div class=" col-xs-6" data-locale="Camera">摄像机:</div>
+						<div class=" col-xs-6">
+							<select name="camera" class="box_height" onchange=ptz_page_camera_change(this.value)>
+								<option value="0">Camera 1</option>
+								<option value="1">Camera 2</option>
+								<option value="2">Camera 3</option>
+								<option value="3">Camera 4</option>
+							</select>
+						</div>
+					</div>
+					<div class="row center-block">
+						<div class=" col-xs-6" data-locale="Camera IP">相机IP:</div>
+						<div class=" col-xs-6">
+							<input type="text" class="box_height" name="camera_ip" id="dev_ip" placeholder="0.0.0.0"/>
+						</div>
+					</div>
+					<div class="row center-block ">
+						<div class=" col-xs-6" data-locale="TCP Port">TCP 端口:</div>
+						<div class=" col-xs-6">
+							<input type="text" class="box_height" id="ptz_port" value="5678" placeholder="0"
+								   name="camera_tcpport"/>
+						</div>
+					</div>
+					<div class="row center-block ">
+						<div class=" col-xs-6" data-locale="Visca Address:">Visca 地址:</div>
+						<div class=" col-xs-6">
+							<select name="camera_visca" id="visca_addr" class="box_height">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+							</select>
+						</div>
+					</div>
+					<div class="row center-block ">
+						<div class=" col-xs-6" data-locale="Move Speed">移动速度: <!--水平速度：--></div>
+						<div class=" col-xs-6">
+							<select name="camera_movespeed" id="pan_speed" class="box_height">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+								<option value="13">13</option>
+								<option value="14">14</option>
+								<option value="15">15</option>
+								<option value="16">16</option>
+								<option value="17">17</option>
+								<option value="18">18</option>
+								<option value="19">19</option>
+								<option value="20">20</option>
+							</select>
+						</div>
+					</div>
+					<div class="row center-block ">
+						<div class="ptz_row">
+							<input type="button" class="valfont ptz_anniu center-block" onclick="ptz_apply()"
+								   data-locale="Start" value="启用" />
+						</div>
+					</div>
+					<div class="row center-block ">
+						<div class=" col-xs-12 center-block">
+								<span class="button_list center-block" id="touch">
+									<button class="ptzbtn" id="ptz_upleft"></button>
+									<button class="ptzbtn" id="ptz_up"></button>
+									<button class="ptzbtn" id="ptz_upright"></button><br>
+									<button class="ptzbtn" id="ptz_left"></button>
+									<button class="ptzbtn" id="ptz_home"></button>
+									<button class="ptzbtn" id="ptz_right"></button><br>
+									<button class="ptzbtn" id="ptz_downleft"></button>
+									<button class="ptzbtn" id="ptz_down"></button>
+									<button class="ptzbtn" id="ptz_downright"></button>
+								</span>
+						</div>
+					</div>
+					<div class="row center-block">
+						<div class=" col-xs-6" data-locale="Zoom Speed">变焦速度:</div>
+						<div class=" col-xs-6">
+							<select name="camera_zoomspeed" id="zoom_speed" class="box_height">
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+							</select>
+						</div>
+					</div>
+					<div class="row center-block ptz_bt_mg">
+						<div class="col-xs-6 btz_background">
+<!--
+							<input type="button" id="zoom_near" class="valfont anniu center-block" data-locale="Zoom In" value="推近" name="camera_zoom_near" />
+-->
+							<button id="zoom_near" class="anniu center-block" name="camera_zoom_near" data-locale="Zoom In">推近</button>
+						</div>
+						<div class="col-xs-6 btz_background">
+<!--
+							<input type="button" id="zoom_far" class="valfont anniu center-block" data-locale="Zoom Out" value="拉远" name="camera_zoom_far" />
+-->
+							<button id="zoom_far" class="anniu center-block" name="camera_zoom_far" data-locale="Zoom Out">拉远</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--    ****************************************5音频********************************************-->
+			<div class="swiper-slide slidepage ptz_mg swiper_yinpin">
+				<div class="container" id="audio_box">
+					<div class="audio-box">
+						<div class="row">
+							<div class="col-xs-6 audio_left" data-locale="Audio output:">音频输出:</div>
+							<!--<div class="col-xs-3">
+                                <a href="#" class="toggle-ctrl toggle-on" name="out" onclick="toggleCtrl(this);"></a>
+                            </div>-->
+							<div class="col-xs-6 audio_right" id="audio-page">
+								<a href="#" class="toggle-ctrl toggle-hunyin" name="toggle" onclick="toggleCtrl(this);"></a>
+							</div>
+							<!--<div class="col-xs-3 col-xs-offset-3">
+                                <span>OUT</span>
+                            </div>-->
+						</div>
+						<!--	<div class="row">
+                                <div class="audio-progress" name="audio_progress_out">
+                                    <div class="progress_bg" name="access_bg_out">
+                                        <div class="progress_bar" name="progress_bar_out"></div>
+                                    </div>
+                                    <div class="progress_btn" name="audio_channel_out"	></div>
+                                    <div class="text" name="text_out">0%</div>
+                                </div>
+                            </div>-->
+					</div>
+					<!--	<div class="audio-box">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <a href="#" class="toggle-ctrl toggle-lineln" name="toggle_button_1" onclick="toggleCtrl(this);"></a>
+                                </div>
+                                <div class="col-xs-3 col-xs-offset-6">
+                                    <span data-locale="Channel 1">通道 1</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="audio-progress" name="audio_progress_1">
+                                    <div class="progress_bg" name="access_bg_1">
+                                        <div class="progress_bar" name="progress_bar_1"></div>
+                                    </div>
+                                    <div class="progress_btn" name="audio_channel_1"></div>
+                                    <div class="text" name="text_1">0%</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="audio-box">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <a href="#" class="toggle-ctrl toggle-lineln" name="toggle_button_2" onclick="toggleCtrl(this);"></a>
+                                </div>
+                                <div class="col-xs-3 col-xs-offset-6">
+                                    <span data-locale="Channel 2">通道 2</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="audio-progress" name="audio_progress_2">
+                                    <div class="progress_bg" name="access_bg_2">
+                                        <div class="progress_bar" name="progress_bar_2"></div>
+                                    </div>
+                                    <div class="progress_btn" name="audio_channel_2"></div>
+                                    <div class="text" name="text_2">0%</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="audio-box">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <a href="#" class="toggle-ctrl toggle-lineln" name="toggle_button_3" onclick="toggleCtrl(this);"></a>
+                                </div>
+                                <div class="col-xs-3 col-xs-offset-6">
+                                    <span data-locale="Channel 3">通道 3</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="audio-progress" name="audio_progress_3">
+                                    <div class="progress_bg" name="access_bg_3">
+                                        <div class="progress_bar" name="progress_bar_3"></div>
+                                    </div>
+                                    <div class="progress_btn" name="audio_channel_3"
+                                         ></div>
+                                    <div class="text" name="text_3">0%</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="audio-box">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <a href="#" class="toggle-ctrl toggle-lineln" name="toggle_button_4" onclick="toggleCtrl(this);"></a>
+                                </div>
+                                <div class="col-xs-3 col-xs-offset-6">
+                                    <span data-locale="Channel 4">通道 4</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="audio-progress" name="audio_progress_4">
+                                    <div class="progress_bg" name="access_bg_4">
+                                        <div class="progress_bar" name="progress_bar_4"></div>
+                                    </div>
+                                    <div class="progress_btn" name="audio_channel_4"></div>
+                                    <div class="text" name="text_4">0%</div>
+                                </div>
+                        </div>
+                    </div>-->
+				</div>
+			</div>
+			<script src="js/kl.audio.js"></script>
+			<!--  ***********************************6回放*************************************************-->
+			<div class="swiper-slide slidepage ptz_mg" name="fileplay_page">
+				<div class="row center-block ">
+					<div class=" col-xs-6" data-locale="Pass:">通道:</div>
+					<div class=" col-xs-6">
+						<select class="filbalkplay" name="device">
+							<option value="3145728" data-locale="Replay 1">回放1</option>
+						</select>
+					</div>
+				</div>
+
+				<!--选择栏-->
+				<div class="row center-block ">
+					<div class="col-xs-6" data-locale="select files">选择文件:</div>
+					<div class="col-xs-6  opt">
+						<input type="text" class="state_opticy" name="fileplay_path"
+							   onclick="bulid_file_dialog(this,'*.mp4;*.ts');"/>
+					</div>
+				</div>
+				<!--启用-->
+				<div class="row state_top">
+					<!-- <div id="play" class="anniu state_play play"></div> -->
+					<!-- <div class="anniu state_stop" data-locale="Stop">停止</div> -->
+					<input type="button" name="fileplay_operation" data-locale="Load" value="加载"
+						   class="valfont anniu center-block" onclick="fileplay_operation()" />
+				</div>
+			</div>
+			<!--  ***********************************7轮播*************************************************-->
+			<div class="swiper-slide slidepage ptz_mg broad_cast" name="rotate_page">
+				<div class="cast_title">
+					<ul class="cast_title_list">
+						<li data-locale="Device name">设备名</li>
+						<li data-locale="duration">时长</li>
+						<li class="add_to" data-locale="Add to" onclick="add_rotate_item()" >添加</li>
+					</ul>
+
+				</div>
+				<input type="button" class="valfont anniu" name="rotate_operation" onclick="rotate_operation()" data-locale="Submit"  value="提交" />
+			</div>
+			<!--    //*****************************************8推流*********************************//-->
+			<!--<div class="swiper-slide slidepage ptz_mg" name="pushstream_page">
+				<div class="container">
+					<div class="pushstream_device_list">
+						<ul>
+							<li name="1048577" class='active' onclick=on_device_click(this)>PGM</li>
+							<li name="3" onclick=on_device_click(this)>CH1</li>
+							<li name="2" onclick=on_device_click(this)>CH2</li>
+							<li name="1" onclick=on_device_click(this)>CH3</li>
+							<li name="0" onclick=on_device_click(this)>CH4</li>
+						</ul>
+					</div>
+
+					<span style="padding: 5px;color:#01b9ef "> <p>RTMP</p></span>
+					<div class="row center-block ">
+						<div class=" col-xs-6" data-locale="Encoder">码流:</div>
+						<div class=" col-xs-6">
+							<select name='rtmp_encoder_type' class="box_height">
+								<option value="0" data-locale="Main Encoder">主码流</option>
+								<option value="1" data-locale="Sub Encoder">子码流</option>
+							</select>
+						</div>
+					</div>
+					<div class="row center-block ">
+						<div class="col-xs-6" data-locale="Rtmp Url">Rtmp 地址:</div>
+						<div class="col-xs-6">
+							<input class="box_height" type="text" name="rtmp_url" class="inputClass"
+								   placeholder="Please input stream URL..." onclick="build(this,1);"/>
+						</div>
+					</div>
+					<div class="row center-block ">
+						<input type="button" name="rtmp_pushstream_operation" data-locale="start" value="开始"  class="valfont anniu center-block" onclick=start_rtmp_pushstream() />
+						&lt;!&ndash;<button name="rtmp_pushstream_operation" class="anniu center-block" onclick="start_rtmp_pushstream()" data-locale="Start">开始</button>&ndash;&gt;
+					</div>
+					<span style="padding: 5px;color:#01b9ef "> <p>RTSP</p></span>
+
+
+					<div class="row center-block ">
+						<div class=" col-xs-6" data-locale="Encoder">码流:</div>
+						<div class=" col-xs-6">
+							<select name='rtsp_encoder_type' class="box_height">
+								<option value="0" data-locale="Main Encoder">主码流</option>
+								<option value="1" data-locale="Sub Encoder">子码流</option>
+							</select>
+						</div>
+					</div>
+					<div class="row center-block ">
+						<div class=" col-xs-6" data-locale="Rtsp Port">Rtsp 端口:</div>
+						<div class=" col-xs-6"><input class="box_height" name="rtsp_port" type="text"/></div>
+					</div>
+					<div class="row center-block ">
+						<div class=" col-xs-6" data-locale="Rtsp HttpPort">Rtsp Http端口:</div>
+						<div class=" col-xs-6"><input class="box_height" name="rtsp_httpport" type="text"/></div>
+					</div>
+					<div class="row center-block ">
+						<div class=" col-xs-6" data-locale="Account">账户:</div>
+						<div class=" col-xs-6"><input class="box_height" name="username" type="text"/></div>
+					</div>
+					<div class="row center-block ">
+						<div class=" col-xs-6" data-locale="uPassword">密码:</div>
+						<div class=" col-xs-6"><input class="box_height" name="password" type="text"/></div>
+					</div>
+					<div class="row center-block ">
+						<div class=" col-xs-6" data-locale="Session Name">会话名称:</div>
+						<div class=" col-xs-6"><input class="box_height" name="rtsp_sdp" type="text"/></div>
+					</div>
+					<div class="row center-block ">
+						<div class=" col-xs-6" data-locale="Rtsp Url">Rtsp 地址:</div>
+						<div class=" col-xs-6">
+							<input class="box_height" type="text" name="rtsp_url" class="inputClass"
+								   placeholder="browse stream url..." onclick="build(this,2);"/>
+						</div>
+					</div>
+					<div class="row center-block ">
+						<input type="button" name="rtsp_pushstream_operation" data-locale="start"
+							   class="valfont anniu center-block" value="开始" onclick=start_rtsp_pushstream() />
+						&lt;!&ndash;<button name="rtsp_pushstream_operation"  class="anniu center-block" onclick="start_rtsp_pushstream()" data-locale="Start">开始</button>&ndash;&gt;
+					</div>
+				</div>
+			</div>-->
+		<!-- ****************************************9设备*********************************************-->
+		<div class="swiper-slide slidepage ptz_mg" name="device_page">
+			<div class="container">
+				<div class="row center-block ">
+					<div class=" col-xs-6" data-locale="Pass:">通道:</div>
+					<div class=" col-xs-6">
+						<select name="device" class="box_height" onchange=device_page_device_change(this.value)>
+							<option value="3">CH1</option>
+							<option value="2">CH2</option>
+							<option value="1">CH3</option>
+							<option value="0">CH4</option>
+						</select>
+					</div>
+				</div>
+				<div class="row center-block ">
+					<div class=" col-xs-6" data-locale="Video Source:">视频信号:</div>
+					<div class=" col-xs-6"><input class="box_height" name="vsrc" type="text" value="-"/></div>
+				</div>
+				<div class="row center-block ">
+					<div class=" col-xs-6" data-locale="Audio Source:">音频信号:</div>
+					<div class=" col-xs-6"><input class="box_height" name="asrc" type="text" value="-"/></div>
+				</div>
+				<div class="row center-block ">
+					<div class=" col-xs-6" data-locale="Resolution:">分辨率:</div>
+					<div class=" col-xs-6"><input class="box_height" name="resolution" type="text" value="-"/></div>
+				</div>
+				<div class="row center-block ">
+					<div class=" col-xs-6" data-locale="Frame Rate:">帧率:</div>
+					<div class=" col-xs-6"><input class="box_height" name="framerate" type="text" value="-"/></div>
+				</div>
+				<div class="row center-block ">
+					<div class=" col-xs-6" data-locale="Audio Channels:">音频通道:</div>
+					<div class=" col-xs-6"><input class="box_height" name="audio_channel" type="text" value="-"/></div>
+				</div>
+				<div class="row center-block ">
+					<div class=" col-xs-6" data-locale="Audio bit depth:">音频位深度:</div>
+					<div class=" col-xs-6"><input class="box_height" name="audio_bits_persample" type="text" value="-"/></div>
+				</div>
+				<div class="row center-block ">
+					<div class=" col-xs-6" data-locale="Audio Sample Rate:">音频采样率:</div>
+					<div class=" col-xs-6"><input class="box_height" name="audio_sample_freq" type="text" value="-" />	</div>
+				</div>
+			</div>
+		</div>
+			<!--完-->
+		</div>
+	</div>
+   <script src="js/swiper.min.js"></script>
+  <script src="js/slide.js"></script>
+	<script>
+        $(document).ready(function () {
+            $(".myFileUpload").change(function () {
+                var arrs = $(this).val().split('\\');
+                var filename = arrs[arrs.length - 1];
+                $(".blueButton").html(filename);
+                $(".blueButton01").html(filename);
+            });
+        });
+	</script>
+</body>
+</html>
